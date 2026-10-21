@@ -1,0 +1,19 @@
+{
+  "appName": "habitGate: Level up system",
+  "developerName": "Monarch Labs",
+  "contactEmail": "monarchlabsapps@gmail.com",
+  "supportEmail": "monarchlabsapps@gmail.com",
+  "playStoreUrl": "",
+  "domain": "https://habitgate.example.com",
+  "effectiveDate": "2026-11-01",
+  "policyVersion": "0.1-draft",
+  "minimumAge": "13",
+  "countryOfGovernance": "India",
+  "developerAddress": "Uttar Pradesh, India",
+  "supabaseRegion": "Dadri, UttarPradesh",
+  "backupRetentionDays": "30",
+  "logRetentionDays": "90",
+  "deletionResponseDays": "30",
+  "inAppDeletePath": "Settings -> Data & Account -> Delete Account",
+  "tagline": "Turn your habits into a game you actually want to play."
+}
