@@ -33,7 +33,7 @@ const page = (p, title, desc, body) => `<!doctype html><html lang="en"><head><me
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="canonical" href="${cfg.domain}${p}">
 <meta name="color-scheme" content="light dark"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F5FC"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0A12">
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="${cfg.domain}${p}"><meta property="og:image" content="${cfg.domain}/assets/og-placeholder.svg"><meta name="twitter:card" content="summary">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
 <script>${THEME}</script><link rel="stylesheet" href="/css/styles.css">
 ${p === '/' ? `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "WebSite", name: cfg.appName, url: cfg.domain }, { "@type": "MobileApplication", name: cfg.appName, operatingSystem: "Android" }] })}</script>` : ''}</head><body>
 <a class="skip" href="#main">Skip to content</a><header><div class="wrap"><a class="logo" href="/">${cfg.appName}</a><nav aria-label="Main">${NAV.map(n => `<a href="${n[0]}">${n[1]}</a>`).join('')}</nav><span id="theme"></span></div></header>
@@ -58,13 +58,13 @@ legal('del', '/legal/delete-account.md', 'delete-account/', `How to delete your 
 const sup = md(fs.readFileSync(R + '/content/support.md', 'utf8'));
 W('support/index.html', page('/support/', 'Support | ' + cfg.appName, `Get help with ${cfg.appName}.`, `<article class="doc">${sup.html}</article>`));
 const cta = cfg.playStoreUrl ? `<a class="btn" href="${cfg.playStoreUrl}">Get it on Google Play</a>` : `<span class="badge">Coming soon</span>`;
-W('index.html', page('/', cfg.appName + ' | Habits as an RPG', cfg.tagline, `<section class="hero"><div><h1>${esc(cfg.tagline)}</h1><p class="meta">${cfg.appName} is a habit and self-improvement app with an RPG theme.</p>${cta}</div><div class="phone" role="img" aria-label="Placeholder for app screenshots">Screenshots go here</div></section>
+W('index.html', page('/', cfg.appName + ' | Habits as an RPG', cfg.tagline, `<section class="hero"><div><h1>${esc(cfg.tagline)}</h1><p class="meta">${cfg.appName} is a habit and self-improvement app with an RPG theme.</p>${cta}</div><img class="phone" src="/assets/phone-mockup.png" width="1008" height="1883" alt="${esc(cfg.appName)} shown on a phone" fetchpriority="high"></section>
 <section class="cards"><div class="card"><h3>Daily quests and streaks</h3><p>[placeholder: edit this text]</p></div><div class="card"><h3>Focus sprints</h3><p>[placeholder: edit this text]</p></div><div class="card"><h3>Avatars and rewards</h3><p>[placeholder: edit this text]</p></div></section>
 <section class="cta"><h2>Ready to start your quest?</h2>${cta}</section>`));
 W('404.html', page('/404.html', 'Page not found | ' + cfg.appName, 'Page not found.', '<h1>Page not found</h1><p>Check the address, or <a href="/">go to the home page</a>.</p>'));
 W('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${cfg.domain}/sitemap.xml\n`);
 W('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', '/privacy/', '/terms/', '/delete-account/', '/support/'].map(u => `<url><loc>${cfg.domain}${u}</loc></url>`).join('')}</urlset>\n`);
-W('site.webmanifest', JSON.stringify({ name: cfg.appName, short_name: cfg.appName, icons: [{ src: '/assets/favicon.svg', sizes: 'any', type: 'image/svg+xml' }], theme_color: '#0B0A12', background_color: '#0B0A12', display: 'browser' }));
+W('site.webmanifest', JSON.stringify({ name: cfg.appName, short_name: cfg.appName, icons: [{ src: '/assets/favicon.svg', sizes: 'any', type: 'image/svg+xml' }, { src: '/assets/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: '/assets/icon-512.png', sizes: '512x512', type: 'image/png' }], theme_color: '#0B0A12', background_color: '#0B0A12', display: 'browser' }));
 const h = cr.createHash('sha256').update(THEME).digest('base64');
 W('_headers', `/*\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-${h}'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'none'; frame-ancestors 'none'\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n`);
 // embed + version

@@ -6,7 +6,7 @@ habitGate: Level up system is operated by Monarch Labs, Uttar Pradesh, India. Co
 
 ## Information we collect
 **Information you provide**
-- Account details: your email address and a password. Authentication is handled by Supabase Authentication, which stores only the credential hash — we never store your password in readable form. The app also offers Google and Apple sign-in buttons. [[CONFIRM: are Google/Apple sign-in providers enabled on the Supabase project, and is email confirmation required at sign-up?]]
+- Account details: your email address and a password. Authentication is handled by Supabase Authentication, which stores only the credential hash — we never store your password in readable form. The app also shows Google and Apple sign-in buttons, but **neither provider is currently enabled**: sign-in today is email and password only, and no email-confirmation step is required — you can use your account as soon as you sign up. We will update this policy when a provider is switched on.
 - Profile: your hunter name, class archetype, rank and level, with a sigil or emblem as your avatar. If you choose a photo as your avatar it is processed on your device and stays on your device — photo avatars are not uploaded to our servers.
 
 **Information created by using the app**
@@ -35,20 +35,20 @@ To run the app and sync your progress, provide rewards and features, fix bugs, k
 | Legal obligations | Legal obligation |
 
 ## Service providers and sharing
-- **Supabase**: authentication and database hosting. Data is hosted in Dadri, UttarPradesh.
+- **Supabase**: authentication and database hosting. Data is hosted on Supabase's managed infrastructure; the hosting region is determined by Supabase and depends on server availability. All data is encrypted at rest, so we cannot read the contents of your stored data.
 - **Google**: Google Play billing — payments are completed in Google Play, never in the app.
 - **RevenueCat**: subscription and purchase-entitlement processing; its webhooks reach a Supabase Edge Function. **Sentry**: crash reporting, only in builds configured with a DSN. No other third-party online service receives your data — the app's remaining dependencies are client-side libraries that run on your device and make no network requests of their own.
 
 We may disclose data if legally required, or in a business transfer. We do not sell personal data and do not share it for advertising.
 
 ## Retention
-We keep your data while your account exists. When you delete your account we delete your profile and app data (see [Delete your account](/delete-account/)). Backups may keep copies for up to 30 days and security logs for up to 90 days. Purchase records may be kept where the law requires.
+We keep your data while your account exists. When you delete your account we delete your profile and app data (see [Delete your account](/delete-account/)). Backups may keep copies for up to 30 days and security logs for up to 90 days. Purchase and billing records required by law or fraud prevention may be kept for up to 1 year.
 
 ## Your rights and choices
 You can ask to access, correct, export or delete your data, to object to processing, or to withdraw consent. You can also export your progress yourself from the app (Stats → export; available to Premium users). Delete in the app (Settings -> Data & Account -> Delete Account) or see [Delete your account](/delete-account/). Email monarchlabsapps@gmail.com; we reply within 30 days.
 
 ## Regional notices
-**EEA and UK:** you can lodge a complaint with your local data protection authority. Data may be transferred to and processed in countries outside your own, protected by [[CONFIRM: transfer mechanism]].
+**EEA and UK:** you can lodge a complaint with your local data protection authority. Data may be transferred to and processed in countries outside your own, including by processors located outside the EEA and UK. Where the GDPR applies, these transfers are protected by the Standard Contractual Clauses approved by the European Commission, which our processors make available.
 
 **California:** we collect the categories listed above, and we do not sell or share personal information as defined by CCPA/CPRA. You may request access, deletion and correction.
 

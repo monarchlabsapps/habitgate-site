@@ -10,15 +10,19 @@ The app codebase (`../../solo-leveling-dashboard`) **has been scanned** — DATA
 |---|---|---|
 | DEVELOPER_ADDRESS_OR_COUNTRY | config | The developer address (or say "use India" and I will put the country there) |
 
-## Remaining [[CONFIRM]] items (4 marks on the built pages)
+## [[CONFIRM]] items — all resolved 2026-10-22
 Resolved from code this pass (no longer marks): subscription pricing/renewal/refunds and "no other third-party online service" (terms), Sentry-conditional wording (privacy), bug-report data fields (support), bug reports surviving account deletion (delete-account — fixed by app migration 0055).
 
-| # | Where | Question |
+Owner answers applied to `legal/*.md`:
+
+| # | Where | Owner answer applied |
 |---|---|---|
-| 1 | privacy (Information we provide) | Are Google/Apple sign-in providers enabled on the Supabase project, and is email confirmation required at sign-up? (The buttons exist in code — `components/auth/login-modal.tsx:133,232,241`, `components/auth/auth-flow.tsx:147` — and the code already handles "provider not enabled", so either answer is safe to publish) |
-| 2 | privacy (Regional notices) | EEA/UK transfer mechanism (e.g. EU Standard Contractual Clauses), or delete the sentence |
-| 3 | terms (Acceptance and eligibility) | Parental-consent rule for minors (the app enforces no age gate — DATA-INVENTORY.md — so this is policy, not code) |
-| 4 | delete-account (What may be kept) | Which purchase/billing records are kept by law (or "none beyond Google's own records") |
+| 1 | privacy (Information we provide) | Google provider **not yet enabled**; Apple exists but is **disabled** (App Store licence later); **no email confirmation** at sign-up. Policy now says sign-in is email + password only until a provider is switched on. |
+| 2 | privacy (Regional notices) | Filled with the European Commission's **Standard Contractual Clauses** (the usual GDPR mechanism when a processor moves data outside the EEA/UK). ⚠ Lawyer review: confirm Supabase's SCC coverage before publishing. |
+| 3 | terms (Acceptance and eligibility) | Habit tracker anyone can use; minors need parental consent **only** for purchases or system-generated exercise content. |
+| 4 | delete-account (What may be kept) | Purchase/billing records kept **up to 1 year**; retention section in privacy.md aligned to the same number. |
+
+Also resolved: `supabaseRegion` — owner says the region is whatever Supabase allocates by availability, not a fixed region, so the config key was **removed** and privacy.md describes hosting in prose ("managed infrastructure… encrypted at rest, so we cannot read the contents").
 
 Sentry is no longer a mark: the pages say "only in builds configured with a DSN", which is exactly what the code shows (`lib/crash.ts:13` no-ops without `NEXT_PUBLIC_SENTRY_DSN`; no DSN in `.env.local`). Say the word if you want that sentence gone instead.
 
@@ -29,7 +33,7 @@ Status: 1–5 **FIXED in code** (1–2 by `supabase/migrations/0055_deletion_com
 3. **There is no signup consent screen.** **FIXED (2026-10-21)** — a consent line now sits under the "Initialize" CTA (`components/auth/step-1-identity.tsx`): "By initializing you agree to our Terms of Service and Privacy Policy", with both docs opening through the same site-first/bundled-viewer rule (`useLegalDoc()` in `lib/legal-external.ts`; wired in `app/(auth)/onboarding/page.tsx` and the `app/page.tsx` auth overlay). No accepted-policy version is recorded — that was explicitly out of scope (unrequested feature; suggestion kept in SYNC.md).
 4. **Delete-flow copy mismatch (app-internal).** **FIXED (2026-10-21)** — `app/account-deletion/page.tsx` now describes the real flow: type `DELETE`, then re-enter the account password.
 5. **The app's bundled Privacy Policy contradicts the code (drift).** **FIXED (2026-10-21)** — `docs/legal/privacy-policy.md` (and terms/data-safety) now state the truth: photo avatars are 256 px on-device data URLs, nothing is ever uploaded, the only avatar data that leaves the device is a sigil id. The bundle now also covers bug reports being deleted with the account.
-6. **`site.config.json` `supabaseRegion` is not a region.** It reads `Dadri, UttarPradesh` — not a Supabase region, and not derivable from the repo (only the project ref `rmtjryfryscfrynfffraf` is in code). It also contradicts the earlier owner fill "Southeast Asia (Singapore)". Confirm the region in the Supabase dashboard before publishing.
+6. **`site.config.json` `supabaseRegion` is not a region.** ~~It reads `Dadri, UttarPradesh` — not a Supabase region, and not derivable from the repo (only the project ref `rmtjryfryscfrynfffraf` is in code).~~ **RESOLVED 2026-10-22**: the owner confirmed the hosting region is whatever Supabase allocates by availability (and that all data is encrypted at rest, unreadable to us), so the key was removed from `site.config.json` and privacy.md describes hosting in prose.
 
 Parity check (`node build.js --check privacy=<app copy> terms=<app copy>`) currently **MISMATCH, intentional**: the app's `docs/legal/*.md` are older drafts, not byte-copies of these pages — these pages still carry 4 `[[CONFIRM]]` marks that the fallback viewer would render as literal text. Substance now matches; byte-copy after the last mark resolves. Only matters while `LEGAL_BASE_URL` is blank — see SYNC.md.
 

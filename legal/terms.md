@@ -2,7 +2,7 @@
 > **Health and safety:** {{appName}} is not medical, psychological, therapeutic or addiction-treatment advice and does not replace a doctor or qualified professional. Exercise suggestions are general and may not suit everyone. Stop if you feel pain or unwell. If you are in crisis or at risk, contact local emergency services or a helpline.
 
 ## Acceptance and eligibility
-By using {{appName}} you agree to these Terms and to our [Privacy Policy](/privacy/). You must be at least {{minimumAge}}. [[CONFIRM: parental consent rule for minors]]
+By using {{appName}} you agree to these Terms and to our [Privacy Policy](/privacy/). You must be at least {{minimumAge}}. {{appName}} is a habit tracker that anyone can use. If you are a minor, parental consent is required before you make any purchase or use system-generated exercise content; no other feature requires parental consent.
 
 ## Your account
 Give accurate information, keep your sign-in secure, and use one account per person. You are responsible for activity on your account.

@@ -10,7 +10,6 @@
   "minimumAge": "13",
   "countryOfGovernance": "India",
   "developerAddress": "Uttar Pradesh, India",
-  "supabaseRegion": "Dadri, UttarPradesh",
   "backupRetentionDays": "30",
   "logRetentionDays": "90",
   "deletionResponseDays": "30",

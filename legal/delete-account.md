@@ -13,7 +13,7 @@ If you no longer have the app or cannot sign in, [email us]({{mailto}}) with the
 Your authentication record, and with it your profile (hunter name, avatar, rank, level, XP, coins, streak), stats, quests and quest history, dungeon raids and check-ins, sprint sessions, skill arcs, achievements, owned items, coin transactions, settings, your cloud backup, loot boxes, entitlement records, purchase-event records, and any bug reports you sent from this account. Copies of your data on your device are cleared and you are signed out.
 
 ## What may be kept
-- Purchase and billing records required by law or fraud prevention. [[CONFIRM]]
+- Purchase and billing records required by law or fraud prevention — kept for up to 1 year.
 - Backups, until they expire ({{backupRetentionDays}} days).
 - Security logs ({{logRetentionDays}} days).
 

@@ -25,7 +25,7 @@ mark.ph{background:#FFE066;color:#000;padding:0 3px;border-radius:4px;outline:1p
 .hero h1{font-size:clamp(2.2rem,6vw,3.4rem);margin:.2em 0}
 .badge,.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;font-weight:600;text-decoration:none}
 .badge{border:1px solid var(--bd);background:var(--sf);color:var(--mu)}.btn{background:var(--ac);color:var(--on)}
-.phone{aspect-ratio:9/16;max-width:260px;width:100%;margin:auto;border:2px dashed var(--bd);border-radius:32px;display:grid;place-items:center;color:var(--mu);text-align:center;padding:16px;background:var(--sf)}
+.phone{display:block;max-width:260px;width:100%;height:auto;margin:auto;border-radius:32px;background:transparent;filter:drop-shadow(0 20px 44px color-mix(in srgb,var(--ac) 30%,transparent))}
 .cards{display:grid;gap:16px;margin:2rem 0}@media(min-width:800px){.cards{grid-template-columns:repeat(3,1fr)}}
 .card{border:1px solid var(--bd);background:var(--sf);border-radius:20px;padding:20px}.card h3{margin:0 0 .3em;font-size:1.15rem}.card p{margin:0;color:var(--mu)}
 .cta{text-align:center;padding:2rem 0}
