@@ -5,11 +5,12 @@
 {{appName}}'s full game loop — quests, the Daily Directive, emergency protocols, the 30 catalog dungeons, the dungeon creator, XP, levels, ranks, stats, streaks, guest mode and the coin Store — is free. Premium adds convenience and cosmetics; it never unlocks power and never gates the core loop.
 
 ## What Premium includes
-One subscription ("{{appName}} Premium") with three benefits:
+One subscription ("{{appName}} Premium") with four benefits:
 
 - **Cloud Backup and Sync** — multi-device sync and restore on a new phone. Without Premium, progress is stored on your device only.
 - **Premium cosmetics** — a fixed set of exclusive skins, titles and avatar cosmetics. Cosmetic only; there are no XP or stat multipliers.
 - **Advanced insights** — deeper statistics: XP trend analytics, the activity heatmap and data export.
+- **Sprint ambience** — three extra focus-session soundscapes: Ocean, Dungeon hum and Flute. Rain and Forest stay free.
 
 ## Pricing
 
