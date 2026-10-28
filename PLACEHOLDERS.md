@@ -4,7 +4,7 @@ Run `node build.js` to list the ones still present. Config values live in `site.
 The app codebase (`../../solo-leveling-dashboard`) **has been scanned** — DATA-INVENTORY.md records every fact as *confirmed in code* (`file:line`) or *unknown, needs owner confirmation*.
 
 **Owner values filled 2026-10-16:** developerName, contactEmail, supportEmail, domain, effectiveDate (2026-11-01), minimumAge (13), countryOfGovernance (India), supabaseRegion (Southeast Asia (Singapore)), backupRetentionDays (30), logRetentionDays (90), deletionResponseDays (30), reply days (30), inAppDeletePath.
-⚠ The domain `https://habitgate.example.com` is a reserved documentation domain — replace it with the real domain before deploying or Play will reject the URLs.
+⚠ The domain is now the live deploy **https://habitgate.pages.dev** (Cloudflare Pages, repo `monarchlabsapps/habitgate-site`) — set in `site.config.json` 2026-10-24, so canonical/og:url/sitemap/robots all point at the real site.
 
 | Placeholder | Where | What I need from you |
 |---|---|---|
@@ -35,6 +35,6 @@ Status: 1–5 **FIXED in code** (1–2 by `supabase/migrations/0055_deletion_com
 5. **The app's bundled Privacy Policy contradicts the code (drift).** **FIXED (2026-10-21)** — `docs/legal/privacy-policy.md` (and terms/data-safety) now state the truth: photo avatars are 256 px on-device data URLs, nothing is ever uploaded, the only avatar data that leaves the device is a sigil id. The bundle now also covers bug reports being deleted with the account.
 6. **`site.config.json` `supabaseRegion` is not a region.** ~~It reads `Dadri, UttarPradesh` — not a Supabase region, and not derivable from the repo (only the project ref `rmtjryfryscfrynfffraf` is in code).~~ **RESOLVED 2026-10-22**: the owner confirmed the hosting region is whatever Supabase allocates by availability (and that all data is encrypted at rest, unreadable to us), so the key was removed from `site.config.json` and privacy.md describes hosting in prose.
 
-Parity check (`node build.js --check privacy=<app copy> terms=<app copy>`) currently **MISMATCH, intentional**: the app's `docs/legal/*.md` are older drafts, not byte-copies of these pages — these pages still carry 4 `[[CONFIRM]]` marks that the fallback viewer would render as literal text. Substance now matches; byte-copy after the last mark resolves. Only matters while `LEGAL_BASE_URL` is blank — see SYNC.md.
+Parity check (`node build.js --check privacy=<app copy> terms=<app copy>`) currently **MISMATCH, intentional**: the app's `docs/legal/*.md` are older drafts, not byte-copies of these pages. Substance now matches; byte-copy after the last CONFIRM item resolves. Moot in practice since `LEGAL_BASE_URL` is now set — the app opens these pages directly and the bundled viewer is only the offline fallback (see SYNC.md).
 
 Before launch, re-run the deletion audit: verify the in-app deletion removes auth user, profile, related rows, and (after 0055 is deployed) the caller's bug reports. If any is missed, that is a bug: fix it, and keep the delete page from claiming it.

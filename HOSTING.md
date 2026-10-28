@@ -2,7 +2,12 @@
 
 The site is **finished static output**: `site/` contains plain HTML/CSS/JS +
 images. Hosting = uploading that folder to a static host. Free, no server, no
-database. Last updated 2026-10-22.
+database. Last updated 2026-10-24.
+
+**DONE 2026-10-24:** deployed to Cloudflare Pages at
+**https://habitgate.pages.dev** (repo `monarchlabsapps/habitgate-site`),
+`site.config.json` domain set, push auto-rebuilds. Sections 1–3 below are the
+record of how it was set up; section 4 is the everyday edit→redeploy flow.
 
 **Yes, you can edit everything later** — privacy policy, terms, changelogs,
 pictures, text — and redeploy in under a minute. How is in section 4.
@@ -28,12 +33,11 @@ nearly identical if you ever switch.
 
 ---
 
-## 2. Before you deploy — 2 one-time fixes
+## 2. Before you deploy — 2 one-time fixes (both DONE 2026-10-24)
 
-1. **Set the real domain.** `site.config.json` still has the placeholder
-   `"domain": "https://habitgate.example.com"`. Decide your Cloudflare project
-   name now (the URL will be `https://<project-name>.pages.dev`) and set it,
-   e.g. `"domain": "https://habitgate.pages.dev"`. This value is baked into the
+1. **Set the real domain.** ~~`site.config.json` still has the placeholder
+   `"domain": "https://habitgate.example.com"`~~ Now
+   `"domain": "https://habitgate.pages.dev"`. This value is baked into the
    canonical link, sitemap, Open Graph tags and the legal links — wrong here =
    wrong everywhere.
 2. **Rebuild and check:**
@@ -119,26 +123,24 @@ image edits never do.)
 All in `site.config.json` — one place, everything updates. Set `playStoreUrl`
 when the app is live to flip the "Coming soon" badge into a real Play button.
 
-### E. Turn the app's legal links on
-Once the site is live, the app should link to it instead of its bundled copies:
-paste the origin into `LEGAL_BASE_URL` in
-`solo-leveling-dashboard/lib/legal-external.ts` (e.g.
-`https://habitgate.pages.dev`). Full details and the parity check are in
-`SYNC.md`.
+### E. Turn the app's legal links on (DONE 2026-10-24)
+`LEGAL_BASE_URL` in `solo-leveling-dashboard/lib/legal-external.ts` is set to
+`https://habitgate.pages.dev`, so the app's Settings/paywall footers and the
+signup consent line open the site in the system browser; the bundled
+`docs/legal/` copies are the offline fallback only. Full details and the
+parity check are in `SYNC.md`.
 
 ---
 
 ## 5. Go-live checklist
 
-- [ ] `domain` in `site.config.json` = the real Pages URL
-- [ ] `node build.js --strict` passes
-- [ ] Site opens; all 5 pages + 404 work
-- [ ] `site/_headers` active — check with
-      `curl -sI https://habitgate.pages.dev/ | grep -i content-security` (you
-      should see the CSP line)
-- [ ] `robots.txt` + `sitemap.xml` reachable
+- [x] `domain` in `site.config.json` = the real Pages URL
+- [x] `node build.js --strict` passes
+- [x] Site opens; all 5 pages + 404 work
+- [x] `site/_headers` active — CSP line confirmed live 2026-10-24
+- [x] `robots.txt` + `sitemap.xml` reachable (200)
 - [ ] Legal pages reviewed by a lawyer (README warning: drafts only)
-- [ ] `LEGAL_BASE_URL` set in the app (section 4E)
+- [x] `LEGAL_BASE_URL` set in the app (section 4E)
 - [ ] Lighthouse run on the live URL (README "not included" list)
 - [ ] Replace `og-placeholder.svg` with a real 1200×630 share image
 
