@@ -3,6 +3,7 @@ The site is live at **https://habitgate.pages.dev** (`LEGAL_BASE_URL` in
 `solo-leveling-dashboard/lib/legal-external.ts` points at it, so the app's
 Settings/paywall footers already open these pages):
 - Privacy policy field: `https://habitgate.pages.dev/privacy/`
+- Subscription disclosure: `https://habitgate.pages.dev/subscriptions/` (in every footer; also shown in-app on the paywall)
 - Data deletion URL field (App content > Data safety): `https://habitgate.pages.dev/delete-account/`
 - Developer name and email must match the site footer.
 

@@ -38,7 +38,7 @@ const page = (p, title, desc, body) => `<!doctype html><html lang="en"><head><me
 ${p === '/' ? `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "WebSite", name: cfg.appName, url: cfg.domain }, { "@type": "MobileApplication", name: cfg.appName, operatingSystem: "Android" }] })}</script>` : ''}</head><body>
 <a class="skip" href="#main">Skip to content</a><header><div class="wrap"><a class="logo" href="/">${cfg.appName}</a><nav aria-label="Main">${NAV.map(n => `<a href="${n[0]}">${n[1]}</a>`).join('')}</nav><span id="theme"></span></div></header>
 <main id="main"><div class="wrap">${body}</div></main>
-<footer><div class="wrap"><nav aria-label="Footer"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/delete-account/">Delete account</a><a href="/support/">Support</a></nav><p>© ${cfg.year} ${inl(cfg.developerName)} · ${inl(cfg.contactEmail)}</p></div></footer><script src="/js/site.js" defer></script></body></html>`;
+<footer><div class="wrap"><nav aria-label="Footer"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/subscriptions/">Subscriptions</a><a href="/delete-account/">Delete account</a><a href="/support/">Support</a></nav><p>© ${cfg.year} ${inl(cfg.developerName)} · ${inl(cfg.contactEmail)}</p></div></footer><script src="/js/site.js" defer></script></body></html>`;
 const W = (f, s) => { fs.mkdirSync(require('path').dirname(S + f), { recursive: true }); fs.writeFileSync(S + f, s) };
 const docs = {};
 function legal(name, src, path, desc, upd) {
@@ -55,6 +55,7 @@ const raw = {};
 raw.privacy = legal('privacy', '/legal/privacy.md', 'privacy/', `How ${cfg.appName} collects, uses and protects your data.`);
 raw.terms = legal('terms', '/legal/terms.md', 'terms/', `The terms for using ${cfg.appName}.`);
 legal('del', '/legal/delete-account.md', 'delete-account/', `How to delete your ${cfg.appName} account and data.`);
+legal('subs', '/legal/subscriptions.md', 'subscriptions/', `Premium pricing, billing periods, auto-renewal, cancellation and refunds for ${cfg.appName}.`);
 const sup = md(fs.readFileSync(R + '/content/support.md', 'utf8'));
 W('support/index.html', page('/support/', 'Support | ' + cfg.appName, `Get help with ${cfg.appName}.`, `<article class="doc">${sup.html}</article>`));
 const cta = cfg.playStoreUrl ? `<a class="btn" href="${cfg.playStoreUrl}">Get it on Google Play</a>` : `<span class="badge">Coming soon</span>`;
@@ -63,7 +64,7 @@ W('index.html', page('/', cfg.appName + ' | Habits as an RPG', cfg.tagline, `<se
 <section class="cta"><h2>Ready to start your quest?</h2>${cta}</section>`));
 W('404.html', page('/404.html', 'Page not found | ' + cfg.appName, 'Page not found.', '<h1>Page not found</h1><p>Check the address, or <a href="/">go to the home page</a>.</p>'));
 W('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${cfg.domain}/sitemap.xml\n`);
-W('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', '/privacy/', '/terms/', '/delete-account/', '/support/'].map(u => `<url><loc>${cfg.domain}${u}</loc></url>`).join('')}</urlset>\n`);
+W('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', '/privacy/', '/terms/', '/subscriptions/', '/delete-account/', '/support/'].map(u => `<url><loc>${cfg.domain}${u}</loc></url>`).join('')}</urlset>\n`);
 W('site.webmanifest', JSON.stringify({ name: cfg.appName, short_name: cfg.appName, icons: [{ src: '/assets/favicon.svg', sizes: 'any', type: 'image/svg+xml' }, { src: '/assets/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: '/assets/icon-512.png', sizes: '512x512', type: 'image/png' }], theme_color: '#0B0A12', background_color: '#0B0A12', display: 'browser' }));
 const h = cr.createHash('sha256').update(THEME).digest('base64');
 W('_headers', `/*\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-${h}'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'none'; frame-ancestors 'none'\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n`);
@@ -75,4 +76,6 @@ for (const n of ['privacy', 'terms']) {
     const m = sub(raw[n]).trim(); fs.writeFileSync(R + `/legal/embed/${n}.md`, m + '\n'); ver.sha256[n] = sha(m)
 }
 fs.writeFileSync(R + '/legal/policy-version.json', JSON.stringify(ver, null, 2) + '\n');
+// Every page the app and the Play listing link to must exist in the output.
+for (const f of ['privacy/', 'terms/', 'subscriptions/', 'delete-account/', 'support/']) if (!fs.existsSync(S + f + 'index.html')) throw new Error('missing page: ' + f);
 if (ph.size) { console.warn('\n!! ' + ph.size + ' placeholders still present (highlighted on pages):\n' + [...ph].join('\n')); if (process.argv.includes('--strict')) process.exit(1) } else console.log('No placeholders left.');

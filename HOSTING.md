@@ -71,7 +71,7 @@ site at `habitgate-site/habitgate/`. No new repo needed.
    - **Build command:** `node build.js`
    - **Build output directory:** `site`
 6. **Save and Deploy.** ~1 minute. Open the URL — you should see the home page;
-   `/privacy/`, `/terms/`, `/support/`, `/delete-account/` all work.
+   `/privacy/`, `/terms/`, `/subscriptions/`, `/support/`, `/delete-account/` all work.
 
 Optional later: **Custom domains → Set up a custom domain** (e.g.
 `habitgate.app`). Buy the name anywhere (~₹700–1000/yr from any registrar),

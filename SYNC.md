@@ -13,9 +13,9 @@ copies.
 ## The app side
 - `solo-leveling-dashboard/lib/legal-external.ts` holds `LEGAL_BASE_URL` — set
   to **https://habitgate.pages.dev** since 2026-10-24, so the Settings footer
-  and the paywall footer open `<site>/privacy/` and `<site>/terms/` in the
-  system browser. `docs/legal/` is now only the offline fallback plus the
-  companion web build's `/legal/*` pages:
+  and the paywall footer open `<site>/privacy/`, `<site>/terms/` and
+  `<site>/subscriptions/` in the system browser. `docs/legal/` is now only the
+  offline fallback plus the companion web build's `/legal/*` pages:
   - `legal/embed/privacy.md` -> `solo-leveling-dashboard/docs/legal/privacy-policy.md`
   - `legal/embed/terms.md`   -> `solo-leveling-dashboard/docs/legal/terms.md`
   - Absolute folder: `e:\solo-levelling\solo-leveling-dashboard\docs\legal\`
@@ -24,8 +24,12 @@ copies.
     (`components/hud/legal-screen.tsx:19-23`) fetches
     `legal/privacy-policy.md` / `legal/terms.md`. Edit `docs/legal/`, never
     `public/legal/` (it is a generated copy).
-- `subscriptions` (pricing) stays in-app only:
-  `solo-leveling-dashboard/docs/legal/subscriptions.md`.
+- `subscriptions` is mirrored too since 2026-10-27 (BUG-06): the site builds
+  `legal/subscriptions.md` to `/subscriptions/`, links it in the footer, and
+  the paywall's "Subscription & Purchases" link opens it
+  (`SITE_PATH.subscriptions` in `lib/legal-external.ts`). Edit this copy and
+  `solo-leveling-dashboard/docs/legal/subscriptions.md` together — the bundled
+  one is the offline fallback.
 - The signup consent line (under the "Initialize" CTA) also follows this rule:
   site first, bundled viewer as the fallback (`useLegalDoc()` in
   `lib/legal-external.ts`; rendered in `app/(auth)/onboarding/page.tsx` and
